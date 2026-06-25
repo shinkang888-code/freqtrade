@@ -56,6 +56,14 @@ wheels/
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+pip-build-*/
+pip-install-*/
+pip-unpack-*/
+pip-metadata-*/
+pip-ephem-wheel-cache-*/
+install.log
+requirements-install.log
+pip-upgrade.log
 
 # Unit test / coverage reports
 htmlcov/
