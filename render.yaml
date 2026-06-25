@@ -1,0 +1,37 @@
+# Freqtrade cloud worker (single instance).
+# Deploy: Render Dashboard -> New Blueprint -> connect shinkang888-code/freqtrade (local-setup)
+services:
+  - type: worker
+    name: freqtrade-bot
+    runtime: image
+    plan: starter
+    image:
+      url: docker.io/freqtradeorg/freqtrade:stable
+    dockerCommand: >
+      trade
+      --config /freqtrade/user_data/config.json
+      --strategy SampleStrategy
+      --logfile /freqtrade/user_data/logs/freqtrade.log
+      --db-url sqlite:////freqtrade/user_data/tradesv3.sqlite
+    disk:
+      name: freqtrade-data
+      mountPath: /freqtrade/user_data
+      sizeGB: 1
+    envVars:
+      - key: FREQTRADE__DRY_RUN
+        value: "true"
+      - key: FREQTRADE__EXCHANGE__KEY
+        sync: false
+      - key: FREQTRADE__EXCHANGE__SECRET
+        sync: false
+
+  - type: web
+    name: freqtrade-docs
+    runtime: static
+    plan: free
+    staticPublishPath: ./public
+    buildCommand: ""
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

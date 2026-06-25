@@ -7,12 +7,13 @@ cd c:\cursor\aicryptotrader\freqtrade
 .\scripts\setup-local.ps1
 ```
 
-## 실행 (Dry-run)
+## 실행 (Dry-run, 단일 인스턴스)
 
 ```powershell
-.\.venv\Scripts\Activate.ps1
-freqtrade trade --config user_data/config.json --strategy SampleStrategy
+.\scripts\start-bot.ps1
 ```
+
+기존 freqtrade 프로세스를 모두 종료한 뒤 **봇 1개만** 시작합니다.
 
 - WebUI: http://127.0.0.1:8080
 - 계정: `freqtrader` / `freqtrader`
@@ -24,5 +25,11 @@ freqtrade trade --config user_data/config.json --strategy SampleStrategy
 
 ## 배포
 
-Freqtrade는 상시 실행 Python 봇이라 **Vercel(서버리스)에는 배포할 수 없습니다.**
-Docker 또는 Render/VPS 같은 상시 실행 환경을 사용하세요.
+| 환경 | 방법 |
+|------|------|
+| **로컬** | `.\scripts\start-bot.ps1` (단일 인스턴스) |
+| **Vercel** | 프로젝트 안내 페이지 (https://freqtrade-lac.vercel.app) |
+| **Render** | `render.yaml` Blueprint로 worker 1개 배포 |
+
+Freqtrade 봇은 상시 실행 프로세스라 Vercel Functions에는 배포할 수 없습니다.
+Render worker 또는 Docker/VPS를 사용하세요.
