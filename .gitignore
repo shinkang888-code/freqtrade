@@ -110,6 +110,7 @@ target/
 
 .env
 .venv
+.vercel
 .idea
 .vscode
 
@@ -123,3 +124,4 @@ target/
 !config_examples/config_freqai.example.json
 
 docker-compose-*.yml
+.vercel
